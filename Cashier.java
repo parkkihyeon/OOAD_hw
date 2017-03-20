@@ -1,84 +1,59 @@
 package KihyeonPark;
 
-import KihyeonPark.DataBase.product;
-import javax.swing.* ;
-
 public class Cashier
 {
-	int num_of_product = 7 ;
-	int sum_money = 0 ;
-	static DataBase db = new DataBase() ;
-	
-	int Calculate_item(Guest guest){
-		int total_price = 0 ;
-		if(plastic_bag(guest)) total_price+= 100 ;
-		
-		for(int i=0 ; i<num_of_product ; i++){
-			int Barcode_num = Doing_Barcode(guest,i).ordinal();
-			int num_of_item = guest.index_numofitem(Barcode_num) ;
-			int price_of_item = db.getElementPrice(Barcode_num) ;
-			int sum = num_of_item * price_of_item ;
-			total_price += sum ;
-		}
-		
-		System.out.println("총 가격은 " + total_price + "원 입니다.");
-		return total_price ;
+	Pos pos ;
+	Gui ui ;
+	Cashier(Gui ui){
+		this.ui = ui ;
+		pos = new Pos(ui) ;
 	}
 	
+	void Delay_time(){
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	// 현금과 카드중에 무엇을 쓸 것인지를 물어봄.
+	void Card_or_Cash(Pos pos, Guest guest, int price){
+//		ui.GetDashboard().append("카드로 하시겠습니까 현금으로 하시겠습니까\n");
+		
+		if(guest.IsCard(price)){
+			pos.Receive_Card(price);
+		}
+		else 
+			pos.Receive_Cash(price);
+	}
+	
+	// 판매과정의 전반적인 프로세스 
+	void selling(Guest guest){
+		pos.ChangingGuest(guest);
+		int total_price  = 0 ;
+		if(plastic_bag(guest)) 
+			total_price+= 100 ;
+		total_price += pos.Calculate_item(guest) ;
+		
+		Delay_time() ;
+		ui.GetDashboard().append("총 가격은 " + total_price + "원 입니다.\n");
+		Card_or_Cash(pos, guest, total_price) ;
+		ui.GetDashboard().append("감사합니다 안녕히 가세요\n");
+		ui.GetDashboard().append("\n");
+		Delay_time() ;
+	}
+	
+	// 비닐봉지의 여부
 	boolean plastic_bag(Guest g){
-		System.out.println("비닐봉지 필요하세요?"); 
 		if(g.Need_plasticbag == true){
-			System.out.println("네"); 
 			return true ;
 		}
 		else {
-			System.out.println("아니오"); 		
 			return false;
 		}
 	}
 	
-	product Doing_Barcode(Guest guest, int item_index){
-		product item = null ;
-		try{
-			for(int j=0; j<num_of_product ; j++){
-				if(guest.index_of_item(item_index).getBarcord()==(db.getBarcord(j))){
-					 switch(j){
-					 case 0:
-						 return product.icecream ;
-					 case 1:
-						 return product.snack ;
-					 case 2:
-						 return product.gum ;
-					 case 3:
-						 return product.cigarret ;
-					 case 4:
-						 return product.kimbab ;
-					 case 5:
-						 return product.tissue ;
-					 case 6:
-						 return product.water ;
-					 default:
-						 return item ;
-					 }
-				}
-
-			}
-		}
-		catch(Exception e){
-			System.out.println(e);
-		} ;
-		return item;
-	}
 	
-	public static void main(String[] args)
-	{
-		// 실행
-		
-		Guest g = new Guest() ;
-		Cashier c = new Cashier() ;
-		
-		c.Calculate_item(g);
-		
-	
-	}
 }

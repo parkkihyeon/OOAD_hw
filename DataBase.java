@@ -3,8 +3,9 @@ package KihyeonPark;
 import java.util.Vector;
 
 public class DataBase {
-	static enum product{icecream, snack, gum, cigarret, kimbab, tissue, water} ; 
-
+	public static enum product{icecream, snack, gum, cigarret, kimbab, tissue, water} ; 
+	private int num_of_product = 7 ;
+	
 	static private String icecream_bar = "97888963420705" ;
 	static private String snack_bar = "97888963420715" ;
 	static private String gum_bar = "97888963420725" ;
@@ -14,7 +15,7 @@ public class DataBase {
 	static private String water_bar = "97888963420765" ;
 
 	static Vector<String> barcord = new Vector<String>() ;
-	
+
 	static private int []price = {1000,2000,500,4500,2500,700,600} ;
 	static private int []num_of_item = {1000,1000,1000,1000,1000,1000,1000} ;
 	
@@ -27,6 +28,7 @@ public class DataBase {
 		barcord.addElement(tissue_bar);
 		barcord.addElement(water_bar);		
 	} ;
+	
 	
 	String getIce_bar(){return icecream_bar ;}
 	String getSnack_bar(){return snack_bar ;}
@@ -45,6 +47,7 @@ public class DataBase {
 	int getTis_price(){	return price[product.tissue.ordinal()] ;}
 	int getWater_price(){return price[product.water.ordinal()] ;}
 	int getElementPrice(int index){ return price[index] ; }
+	int getNum_of_product(){return num_of_product ; }
 	
 	void Setnum_Icecream(int num) { num_of_item[product.icecream.ordinal()] -= num ; }
 	void Setnum_Snack(int num) { num_of_item[product.icecream.ordinal()] -= num ;}
@@ -53,5 +56,15 @@ public class DataBase {
 	void Setnum_kimbab(int num) { num_of_item[product.icecream.ordinal()] -= num ;}
 	void Setnum_tissue(int num) { num_of_item[product.icecream.ordinal()] -= num ;}
 	void Setnum_water(int num) { num_of_item[product.icecream.ordinal()] -= num ;}
+	
+	void Show_DB(){
+		System.out.println("icecream : " + num_of_item[0]) ;
+		System.out.println("snack : " + num_of_item[1]) ;
+		System.out.println("gum : " + num_of_item[2]) ;
+		System.out.println("cigarret : " + num_of_item[3]) ;
+		System.out.println("kimbab : " + num_of_item[4]) ;
+		System.out.println("tissue : " + num_of_item[5]) ;
+		System.out.println("water : " + num_of_item[6]) ;
+	}
 	
 }

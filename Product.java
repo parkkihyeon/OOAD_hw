@@ -1,5 +1,5 @@
 package KihyeonPark;
-import KihyeonPark.DataBase.product;
+import KihyeonPark.DisplayCase.product;
 
 class Product {
 	private String name ;
@@ -64,11 +64,9 @@ class Product {
 		return Barcord ;
 	}
 	
-	
 	int getNumber(){
 		return number ;
 	}
-	
 	
 	void SetName(String name){
 		this.name = name ;

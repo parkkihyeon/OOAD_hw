@@ -1,7 +1,5 @@
 package KihyeonPark;
 
-import javax.swing.text.View;
-
 import KihyeonPark.DataBase.product;
 
 public class Pos {
@@ -17,6 +15,15 @@ public class Pos {
 		now_money = 0;
 	}
 
+	static void Request_Item(){
+		try{
+			int purchasing_numofItem = Integer.parseInt(Stock_gui.getAdd_item().getText()) ;
+			product select_itemnum = product.valueOf((String) Stock_gui.getComboBox().getSelectedItem()) ; 
+			DataBase.SetItem(select_itemnum, -purchasing_numofItem);
+		}
+		catch(Exception e){System.out.println(e);} ;
+	}
+	
 	int getSumMoney() {
 		return sum_of_money;
 	}
@@ -31,11 +38,12 @@ public class Pos {
 
 		for (int i = 0; i < num_of_product; i++) {
 			int Barcode_num = Doing_Barcode(guest, i).ordinal();
-			int num_of_item = guest.index_numofitem(Barcode_num);
+			int num_of_item = guest.getnum_itemof(Barcode_num);
 			int price_of_item = DataBase.getElementPrice(Barcode_num);
 			int sum = num_of_item * price_of_item;
 			
 			if (sum == 0) continue;
+			
 			Gui.Waiting_Barcord() ;
 			DataBase.SetItem(Doing_Barcode(guest, i), num_of_item);
 			Gui.GetDashboard().append(DataBase.getBarcord(Barcode_num) + "(" + Doing_Barcode(guest, i) + ") : " + sum + "원 " + "\n");
@@ -63,7 +71,7 @@ public class Pos {
 		product item = null;
 		try {
 			for (int j = 0; j < num_of_product; j++) {
-				if (guest.index_of_item(item_index).getBarcord() == (DataBase.getBarcord(j))) {
+				if (guest.getItem_ofindex(item_index).getBarcord() == (DataBase.getBarcord(j))) {
 					switch (j) {
 					case 0:
 						return product.icecream;

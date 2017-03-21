@@ -6,6 +6,7 @@ public class Main {
 	
 	static Gui ui = new Gui();
 	static Cashier cashier = new Cashier() ;	
+	static int guest_number = 1 ;
 	
 	static void Cutomer_Comein(){
 		Random random_second = new Random() ;
@@ -15,22 +16,24 @@ public class Main {
 	
 	static Guest Customer_doing(){
 		Cutomer_Comein();
-		Gui.GetDashboard().append("손님이 입장하였습니다.\n");
-		Guest g = new Guest() ;
+		Gui.GetDashboard().append("손님"+ guest_number++ +" 이 입장하였습니다.\n");
+		Guest guest = new Guest() ;
 		Gui.GetDashboard().append("(계산을 시작하시오)\n");
-		
-		return g ;
+		return guest ;
+	}
+	
+	static void Refresh_window(int price) {
+		Gui.Gettf2().setText(String.valueOf(cashier.pos.getNowMoney())+"원");
+		Gui.Gettf().setText(String.valueOf(price+"원"));	
 	}
 	
 	public static void main(String[] args)
-	{
-		
+	{	
 		DataBase db = new DataBase() ;
 		while(true){		
 			cashier.selling(Customer_doing());
-			int Total_price = cashier.pos.getSumMoney() ;		
-			Gui.Gettf2().setText(String.valueOf(cashier.pos.getNowMoney())+"원");
-			Gui.Gettf().setText(String.valueOf(Total_price+"원"));	
+			Refresh_window(cashier.pos.getSumMoney()) ;		
+			
 		}
 	}
 }

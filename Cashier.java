@@ -27,8 +27,9 @@ public class Cashier
 		Util.Delay_time(1) ;
 		Gui.GetDashboard().append("총 가격은 " + total_price + "원 입니다.\n");
 		Card_or_Cash(pos, guest, total_price) ;
-		Gui.GetDashboard().append("감사합니다 안녕히 가세요\n");
-		Gui.GetDashboard().append("\n");
+		Gui.SelectingPayment();
+		Util.Delay_time(1) ;
+		Gui.GetDashboard().append("감사합니다 안녕히 가세요.\n\n");
 		Util.Delay_time(1) ;
 	}
 	
@@ -42,5 +43,7 @@ public class Cashier
 		}
 	}
 	
-	
+	void Bespeak() {
+		pos.Request_Item() ;
+	}
 }

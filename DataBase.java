@@ -17,7 +17,7 @@ public class DataBase {
 	static private Vector<String> barcord = new Vector<String>() ;
 
 	static private int []price = {1000,2000,500,4500,2500,700,600} ;
-	static private int []num_of_item = {1000,1000,1000,1000,1000,1000,1000} ;
+	static private int []num_of_item = {100,100,100,100,100,100,100} ;
 	
 	DataBase(){
 		barcord.addElement(icecream_bar);

@@ -19,9 +19,7 @@ public class Cashier
 	}
 	
 	// 현금과 카드중에 무엇을 쓸 것인지를 물어봄.
-	void Card_or_Cash(Pos pos, Guest guest, int price){
-//		ui.GetDashboard().append("카드로 하시겠습니까 현금으로 하시겠습니까\n");
-		
+	void Card_or_Cash(Pos pos, Guest guest, int price){		
 		if(guest.IsCard(price)){
 			pos.Receive_Card(price);
 		}

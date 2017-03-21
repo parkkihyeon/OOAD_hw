@@ -49,22 +49,55 @@ public class DataBase {
 	int getElementPrice(int index){ return price[index] ; }
 	int getNum_of_product(){return num_of_product ; }
 	
-	void Setnum_Icecream(int num) { num_of_item[product.icecream.ordinal()] -= num ; }
-	void Setnum_Snack(int num) { num_of_item[product.icecream.ordinal()] -= num ;}
-	void Setnum_Gum(int num) { num_of_item[product.icecream.ordinal()] -= num ;}
-	void Setnum_cigarret(int num) { num_of_item[product.icecream.ordinal()] -= num ;}
-	void Setnum_kimbab(int num) { num_of_item[product.icecream.ordinal()] -= num ;}
-	void Setnum_tissue(int num) { num_of_item[product.icecream.ordinal()] -= num ;}
-	void Setnum_water(int num) { num_of_item[product.icecream.ordinal()] -= num ;}
+	static void Setnum_Icecream(int num) { num_of_item[product.icecream.ordinal()] -= num ; }
+	static void Setnum_Snack(int num) { num_of_item[product.icecream.ordinal()] -= num ;}
+	static void Setnum_Gum(int num) { num_of_item[product.icecream.ordinal()] -= num ;}
+	static void Setnum_cigarret(int num) { num_of_item[product.icecream.ordinal()] -= num ;}
+	static void Setnum_kimbab(int num) { num_of_item[product.icecream.ordinal()] -= num ;}
+	static void Setnum_tissue(int num) { num_of_item[product.icecream.ordinal()] -= num ;}
+	static void Setnum_water(int num) { num_of_item[product.icecream.ordinal()] -= num ;}
+	public static void SetItem(product Item, int num)
+	{
+		switch(Item)
+		{
+		case icecream :
+			Setnum_Icecream(num) ;
+			break ;
+		case snack :
+			Setnum_Snack(num) ;
+			break ;
+		case gum :
+			Setnum_Gum(num) ;
+			break ;
+		case cigarret :
+			Setnum_cigarret(num) ;
+			break ;
+		case kimbab :
+			Setnum_kimbab(num) ;
+			break ;
+		case tissue :
+			Setnum_tissue(num) ;
+			break ;
+		case water :
+			Setnum_water(num);
+			break ;
+		}
+		
+	}
 	
-	void Show_DB(){
-		System.out.println("icecream : " + num_of_item[0]) ;
-		System.out.println("snack : " + num_of_item[1]) ;
-		System.out.println("gum : " + num_of_item[2]) ;
-		System.out.println("cigarret : " + num_of_item[3]) ;
-		System.out.println("kimbab : " + num_of_item[4]) ;
-		System.out.println("tissue : " + num_of_item[5]) ;
-		System.out.println("water : " + num_of_item[6]) ;
+	public static String Show_DB(){
+		StringBuffer Show = new StringBuffer().append(" ") ;
+		String temp ;
+		
+		Show.append("icecream : " + num_of_item[0]+"\n") ;
+		Show.append("snack : " + num_of_item[1]+"\n") ;
+		Show.append("gum : " + num_of_item[2]+"\n") ;
+		Show.append("cigarret : " + num_of_item[3]+"\n") ;
+		Show.append("kimbab : " + num_of_item[4]+"\n") ;
+		Show.append("tissue : " + num_of_item[5]+"\n") ;
+		Show.append("water : " + num_of_item[6]+"\n") ;
+		temp = Show.toString() ;
+		return temp ;
 	}
 	
 }

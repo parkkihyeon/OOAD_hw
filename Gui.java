@@ -16,21 +16,37 @@ public class Gui extends JFrame {
 	
 	public Gui() {
 		super("20123361 KihyeonPark");
-		Container cp = this.getContentPane();
+		JFrame frame = new JFrame("Frame") ;
+		Dimension frameSize = frame.getSize() ;
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize() ;
+		System.out.println(screenSize.width + " " + frameSize.width);
+		frame.setLocation((screenSize.width - frameSize.width)/2, (screenSize.height-frameSize.height)/4);
+		Container cp = frame.getContentPane();
+		
 		int center = 1  ;
 		cp.setLayout(new FlowLayout(center)); 
+		//cp.setBackground(Color.black) ;
+		
+		Font font = new Font("SansSerif", Font.BOLD, 13);
 		
 		jl = new JLabel("총 판매금액"); // 레이블 초기화
 		j2 = new JLabel("지불 금액");
 		tf = new JTextField(10); 
 		tf2 = new JTextField(10);
-		dashboard = new JTextArea(10,30) ;
+		dashboard = new JTextArea(20,30) ;
+		
+		dashboard.setFont(font);
+		tf.setBackground(Color.black);
+		tf2.setBackground(Color.black);
+		dashboard.setBackground(Color.black);
+		
 		
 		b1 = new JButton("바코드 찍기");
 		b2 = new JButton("Clean");
 		b3 = new JButton("결제방법");
-		b4 = new JButton("종료");
+		b4 = new JButton("재고");
 		scrollPane = new JScrollPane(dashboard);  //스크롤판 추가
+	
 		
 		cp.add(jl) ;
 		cp.add(tf) ;
@@ -45,7 +61,9 @@ public class Gui extends JFrame {
 		
 		tf.setEnabled(false);
 		tf2.setEnabled(false);
-
+		dashboard.setEnabled(false);
+		scrollPane.setEnabled(false);
+		
 		// 텍스트의 수직 위치=>top
 		b2.setVerticalTextPosition(JButton.TOP);
 		// 텍스트의 수평 위치=>center
@@ -68,8 +86,9 @@ public class Gui extends JFrame {
 		b4.addActionListener(my);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(400, 300);
-		setVisible(true);
+		
+		frame.setSize(400,500) ;
+		frame.setVisible(true);
 
 	}
 
@@ -78,21 +97,22 @@ public class Gui extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			Object obj = e.getSource();
 			if (obj == b1) {
-				int result = JOptionPane.showConfirmDialog(b2, "바코드 찍기", "바코드", JOptionPane.OK_OPTION );	
-				if(result ==0){
-					
-				}
+				JOptionPane.showMessageDialog(b1, "바코드가 정상적으로 찍혔습니다.", "바코드", JOptionPane.INFORMATION_MESSAGE);
 			} else if (obj == b2) {
-				int result = JOptionPane.showConfirmDialog(b2, "바코드 찍기", "바코드", JOptionPane.OK_OPTION );	
+				int result = JOptionPane.showConfirmDialog(b2, "내용을 삭제하시겠습니까?", "삭제", JOptionPane.OK_OPTION );	
 				if(result ==0){
 					dashboard.setText("");
 				}
-			} else if (obj == b3) {
-				JOptionPane.showMessageDialog(b1, "", "ImageViewer", JOptionPane.INFORMATION_MESSAGE);
+			} else if (obj == b3) {		
+				String[] buttons = {"카드", "현금"};
+				int result = JOptionPane.showOptionDialog(b3, "결제 방법을 선택하세요.", "결제 방법", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, "두번째값");
+				System.out.println(result) ;
+				if(result ==0){ // 카드
+					
+				}
 
 			} else if (obj == b4) {
-				int result = JOptionPane.showConfirmDialog(b2, "종료하시겠습니까?", "종료", JOptionPane.YES_NO_OPTION);
-				if(result == 0) System.exit(1); ;
+				int result = JOptionPane.showConfirmDialog(b4, DataBase.Show_DB(), "재고", JOptionPane.OK_OPTION);
 			}
 
 		}

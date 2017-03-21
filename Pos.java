@@ -5,19 +5,25 @@ import KihyeonPark.DataBase.product;
 public class Pos {
 	private int num_of_product;
 	static private int sum_of_money;
-	static DataBase db;
-	static Gui ui ;
+	private int now_money ;
+	static private DataBase db;
+	static private Gui ui ;
 	Guest guest;
 
 	Pos(Gui ui) {
 		db = new DataBase();
 		num_of_product = db.getNum_of_product();
 		sum_of_money = 0;
+		now_money = 0 ;
 		this.ui = ui;
 	}
 
 	int getSumMoney() {
 		return sum_of_money;
+	}
+	
+	int getNowMoney(){
+		return now_money ;
 	}
 
 	// pos로 아이템을 계산하는 과정.
@@ -31,7 +37,8 @@ public class Pos {
 			int sum = num_of_item * price_of_item;
 			if(sum == 0 ) continue ;
 			Calculation_time() ;
-			ui.GetDashboard().append( db.getBarcord(Barcode_num) +"("+Doing_Barcode(guest, i) + ") : " + sum + "원,  " + "\n");
+			DataBase.SetItem(Doing_Barcode(guest, i), num_of_item);
+			ui.GetDashboard().append( db.getBarcord(Barcode_num) +"("+Doing_Barcode(guest, i) + ") : " + sum + "원 " + "\n");
 			total_price += sum;
 		}
 		return total_price;
@@ -43,15 +50,17 @@ public class Pos {
 
 	void Receive_Cash(int price) {
 		sum_of_money += price;
+		now_money = price ;
 	}
 
 	void Receive_Card(int price) {
 		sum_of_money += price;
+		now_money = price ;
 	}
 
 	void Calculation_time(){
-	
-	}
+		
+	}	
 	
 	// 바코드를 찍는 과정
 	product Doing_Barcode(Guest guest, int item_index) {

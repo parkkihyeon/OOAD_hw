@@ -36,7 +36,8 @@ public class Main {
 		while(true){		
 			cashier.selling(Customer_doing());
 			int Total_price = cashier.pos.getSumMoney() ;		
-			ui.Gettf().setText(String.valueOf(Total_price));	
+			ui.Gettf2().setText(String.valueOf(cashier.pos.getNowMoney())+"원");
+			ui.Gettf().setText(String.valueOf(Total_price+"원"));	
 		}
 	}
 }

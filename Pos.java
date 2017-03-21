@@ -1,29 +1,28 @@
 package KihyeonPark;
 
+import javax.swing.text.View;
+
 import KihyeonPark.DataBase.product;
 
 public class Pos {
 	private int num_of_product;
 	static private int sum_of_money;
-	private int now_money ;
-	static private DataBase db;
-	static private Gui ui ;
+	private int now_money;
+	static boolean running;
 	Guest guest;
 
-	Pos(Gui ui) {
-		db = new DataBase();
-		num_of_product = db.getNum_of_product();
+	Pos() {
+		num_of_product = DataBase.getNum_of_product();
 		sum_of_money = 0;
-		now_money = 0 ;
-		this.ui = ui;
+		now_money = 0;
 	}
 
 	int getSumMoney() {
 		return sum_of_money;
 	}
-	
-	int getNowMoney(){
-		return now_money ;
+
+	int getNowMoney() {
+		return now_money;
 	}
 
 	// pos로 아이템을 계산하는 과정.
@@ -31,14 +30,15 @@ public class Pos {
 		int total_price = 0;
 
 		for (int i = 0; i < num_of_product; i++) {
-			int Barcode_num = Doing_Barcode(guest, i).ordinal();	
+			int Barcode_num = Doing_Barcode(guest, i).ordinal();
 			int num_of_item = guest.index_numofitem(Barcode_num);
-			int price_of_item = db.getElementPrice(Barcode_num);
+			int price_of_item = DataBase.getElementPrice(Barcode_num);
 			int sum = num_of_item * price_of_item;
-			if(sum == 0 ) continue ;
-			Calculation_time() ;
+			
+			if (sum == 0) continue;
+			Gui.Waiting_Barcord() ;
 			DataBase.SetItem(Doing_Barcode(guest, i), num_of_item);
-			ui.GetDashboard().append( db.getBarcord(Barcode_num) +"("+Doing_Barcode(guest, i) + ") : " + sum + "원 " + "\n");
+			Gui.GetDashboard().append(DataBase.getBarcord(Barcode_num) + "(" + Doing_Barcode(guest, i) + ") : " + sum + "원 " + "\n");
 			total_price += sum;
 		}
 		return total_price;
@@ -50,24 +50,20 @@ public class Pos {
 
 	void Receive_Cash(int price) {
 		sum_of_money += price;
-		now_money = price ;
+		now_money = price;
 	}
 
 	void Receive_Card(int price) {
 		sum_of_money += price;
-		now_money = price ;
+		now_money = price;
 	}
-
-	void Calculation_time(){
 		
-	}	
-	
 	// 바코드를 찍는 과정
 	product Doing_Barcode(Guest guest, int item_index) {
 		product item = null;
 		try {
 			for (int j = 0; j < num_of_product; j++) {
-				if (guest.index_of_item(item_index).getBarcord() == (db.getBarcord(j))) {
+				if (guest.index_of_item(item_index).getBarcord() == (DataBase.getBarcord(j))) {
 					switch (j) {
 					case 0:
 						return product.icecream;

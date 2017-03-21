@@ -1,5 +1,5 @@
 package KihyeonPark;
-import KihyeonPark.DisplayCase.product;
+import KihyeonPark.Util.product;
 
 class Product {
 	private String name ;

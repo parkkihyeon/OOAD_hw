@@ -4,7 +4,7 @@ import java.util.Vector;
 
 public class DataBase {
 	public static enum product{icecream, snack, gum, cigarret, kimbab, tissue, water} ; 
-	private int num_of_product = 7 ;
+	private static int num_of_product = 7 ;
 	
 	static private String icecream_bar = "97888963420705" ;
 	static private String snack_bar = "97888963420715" ;
@@ -14,7 +14,7 @@ public class DataBase {
 	static private String tissue_bar = "97888963420755" ;
 	static private String water_bar = "97888963420765" ;
 
-	static Vector<String> barcord = new Vector<String>() ;
+	static private Vector<String> barcord = new Vector<String>() ;
 
 	static private int []price = {1000,2000,500,4500,2500,700,600} ;
 	static private int []num_of_item = {1000,1000,1000,1000,1000,1000,1000} ;
@@ -30,32 +30,32 @@ public class DataBase {
 	} ;
 	
 	
-	String getIce_bar(){return icecream_bar ;}
-	String getSnack_bar(){return snack_bar ;}
-	String getGum_bar(){return gum_bar ;}
-	String getCi_bar(){	return cigarret_bar ;}
-	String getKim_bar(){return kimbab_bar;}
-	String getTis_bar(){return tissue_bar ;}
-	String getWater_bar(){return water_bar ;}
-	String getBarcord(int idnex){ return barcord.get(idnex) ; }
+	static String getIce_bar(){return icecream_bar ;}
+	static String getSnack_bar(){return snack_bar ;}
+	static String getGum_bar(){return gum_bar ;}
+	static String getCi_bar(){	return cigarret_bar ;}
+	static String getKim_bar(){return kimbab_bar;}
+	static String getTis_bar(){return tissue_bar ;}
+	static String getWater_bar(){return water_bar ;}
+	static String getBarcord(int idnex){ return barcord.get(idnex) ; }
 	
-	int getIce_price(){	return price[product.icecream.ordinal()] ;}
-	int getSnack_price(){return price[product.snack.ordinal()] ;}
-	int getGum_price(){	return price[product.gum.ordinal()] ;}
-	int getCi_price(){return price[product.cigarret.ordinal()] ;}
-	int getKim_price(){	return price[product.kimbab.ordinal()] ;}
-	int getTis_price(){	return price[product.tissue.ordinal()] ;}
-	int getWater_price(){return price[product.water.ordinal()] ;}
-	int getElementPrice(int index){ return price[index] ; }
-	int getNum_of_product(){return num_of_product ; }
+	static int getIce_price(){	return price[product.icecream.ordinal()] ;}
+	static int getSnack_price(){return price[product.snack.ordinal()] ;}
+	static int getGum_price(){	return price[product.gum.ordinal()] ;}
+	static int getCi_price(){return price[product.cigarret.ordinal()] ;}
+	static int getKim_price(){	return price[product.kimbab.ordinal()] ;}
+	static int getTis_price(){	return price[product.tissue.ordinal()] ;}
+	static int getWater_price(){return price[product.water.ordinal()] ;}
+	static int getElementPrice(int index){ return price[index] ; }
+	static int getNum_of_product(){return num_of_product ; }
 	
 	static void Setnum_Icecream(int num) { num_of_item[product.icecream.ordinal()] -= num ; }
-	static void Setnum_Snack(int num) { num_of_item[product.icecream.ordinal()] -= num ;}
-	static void Setnum_Gum(int num) { num_of_item[product.icecream.ordinal()] -= num ;}
-	static void Setnum_cigarret(int num) { num_of_item[product.icecream.ordinal()] -= num ;}
-	static void Setnum_kimbab(int num) { num_of_item[product.icecream.ordinal()] -= num ;}
-	static void Setnum_tissue(int num) { num_of_item[product.icecream.ordinal()] -= num ;}
-	static void Setnum_water(int num) { num_of_item[product.icecream.ordinal()] -= num ;}
+	static void Setnum_Snack(int num) { num_of_item[product.snack.ordinal()] -= num ;}
+	static void Setnum_Gum(int num) { num_of_item[product.gum.ordinal()] -= num ;}
+	static void Setnum_cigarret(int num) { num_of_item[product.cigarret.ordinal()] -= num ;}
+	static void Setnum_kimbab(int num) { num_of_item[product.kimbab.ordinal()] -= num ;}
+	static void Setnum_tissue(int num) { num_of_item[product.tissue.ordinal()] -= num ;}
+	static void Setnum_water(int num) { num_of_item[product.water.ordinal()] -= num ;}
 	public static void SetItem(product Item, int num)
 	{
 		switch(Item)

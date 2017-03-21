@@ -1,7 +1,7 @@
 package KihyeonPark;
 import java.util.Random ;
 import java.util.Vector;
-import KihyeonPark.DisplayCase.product;
+import KihyeonPark.Util.product;
 
 public class Guest {
 	int money ;
@@ -23,12 +23,7 @@ public class Guest {
 	
 	void Shopping_Time(){
 		Random product_ran = new Random() ;
-		try {
-			Thread.sleep((product_ran.nextInt(wait_time)+1)*1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Util.Delay_time(product_ran.nextInt(wait_time)+1);
 	}
 	
 	void Demand_Item(){
